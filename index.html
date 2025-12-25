@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/style.css" />
+    <title>Feed Cesar</title>
+</head>
+
+<body>
+    <div class="start-menu">
+        <img class="spinner" src="spinner.gif" />
+        <button type="button" class="start-button hide" onclick="startFeedCesar()">Feed Cesar</button>
+    </div>
+    <div class="game hide">
+        <div class="header">Feed Cesar</div>
+        <div class="menu">
+            <div><img class="meal" src="assets/meal1.png" /></div>
+            <div><img class="meal" src="assets/meal2.png" /></div>
+            <div><img class="meal" src="assets/meal3.png" /></div>
+        </div>
+        <div class="main main-video"></div>
+        <div class="main next-step hide">Pick a food below!</div>
+        <div class="footer">
+            <div class="controls">
+                <div class="control-item label">Healthy</div>
+                <div class="control-item">
+                    <button type="button" id="salad" class="menu-button">Salad</button>
+                    <button type="button" id="chicken" class="menu-button">Chicken</button>
+                    <button type="button" id="fruit" class="menu-button">Fruit</button>
+                </div>
+            </div>
+            <div class="controls">
+                <div class="control-item label">Unhealthy</div>
+                <div class="control-item">
+                    <button type="button" id="chips" class="menu-button">Chips</button>
+                    <button type="button" id="pizza" class="menu-button">Pizza</button>
+                    <button type="button" id="donuts" class="menu-button">Donuts</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/util.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

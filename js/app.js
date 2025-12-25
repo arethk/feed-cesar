@@ -1,21 +1,41 @@
 const DEV = true;
 const assets = {
     /*
-    "start": {
+    "intro": {
         objectURL: null,
-        url: "assets/start.mp4"
+        url: "assets/intro.mp4"
     },
-    "blast": {
+    "salad": {
         objectURL: null,
-        url: "assets/blast.mp4"
+        url: "assets/salad.mp4"
     },
-    "enemy1": {
+    "chicken": {
         objectURL: null,
-        url: "assets/enemy1.mp4"
+        url: "assets/chicken.mp4"
     },
-    "gameover": {
+    "fruit": {
         objectURL: null,
-        url: "assets/gameover.mp4"
+        url: "assets/fruit.mp4"
+    },
+    "chips": {
+        objectURL: null,
+        url: "assets/chips.mp4"
+    },
+    "pizza": {
+        objectURL: null,
+        url: "assets/pizza.mp4"
+    },
+    "donuts": {
+        objectURL: null,
+        url: "assets/donuts.mp4"
+    },
+    "endhealthy": {
+        objectURL: null,
+        url: "assets/endhealthy.mp4"
+    },
+    "endunhealthy": {
+        objectURL: null,
+        url: "assets/endunhealthy.mp4"
     }
     */
 };
@@ -51,6 +71,8 @@ class FeedCesar {
     }
 
     reset() {
+        this.healthy = 0;
+        this.unhealthy = 0;
         this.disableAllMenuButtons();
         this.meal1Png.classList.add("dim");
         this.meal2Png.classList.add("dim");
@@ -64,6 +86,31 @@ class FeedCesar {
             this.enableAllMenuButtons();
             this.flipMainContainerView();
         }, 3000); // 10000
+    }
+
+    runVideo(src) {
+        let isLastSelection = false;
+        const selections = document.querySelectorAll(".selection");
+        if (Array.from(selections).length === 3) {
+            isLastSelection = true;
+        }
+        this.flipMainContainerView();
+        if (isLastSelection === true) {
+            if (this.unhealthy > this.healthy) {
+                // TODO: play unhealthy ending video
+                console.log("unhealthy");
+            } else {
+                // TODO: play healthy ending video
+                console.log("healthy");
+            }
+        } else {
+            // TODO: play src video
+
+            setTimeout(() => {
+                this.enableNonSelectedMenuButtons();
+                this.flipMainContainerView();
+            }, 1000);
+        }
     }
 
     flipMainContainerView() {
@@ -115,32 +162,29 @@ class FeedCesar {
         const id = button.id;
         button.classList.add("selection");
         app.disableAllMenuButtons();
-        app.flipMainContainerView();
         switch (id) {
             case "salad":
-
+                ++app.healthy;
                 break;
             case "chicken":
-
+                ++app.healthy;
                 break;
             case "fruit":
-
+                ++app.healthy;
                 break;
             case "chips":
-
+                ++app.unhealthy;
                 break;
             case "pizza":
-
+                ++app.unhealthy;
                 break;
             case "donuts":
-
+                ++app.unhealthy;
                 break;
             default:
                 console.log("Button id not found");
         }
-        setTimeout(() => {
-            app.enableNonSelectedMenuButtons();
-        }, 777);
+        app.runVideo(app.assets[id]);
     }
 
     destroy() {

@@ -1,6 +1,5 @@
-const DEV = true;
+const DEV = false;
 const assets = {
-    /*
     "intro": {
         objectURL: null,
         url: "assets/intro.mp4"
@@ -37,7 +36,6 @@ const assets = {
         objectURL: null,
         url: "assets/endunhealthy.mp4"
     }
-    */
 };
 class FeedCesar {
     constructor(assets) {
@@ -80,12 +78,12 @@ class FeedCesar {
         this.videoContainer.classList.remove("hide");
         this.nextStepContainer.classList.add("hide");
         this.gameContainer.classList.remove("hide");
-        // TODO: play intro here
-
+        const video = Util.createVideo(this.assets["intro"].objectURL, "videoIntro", false, false, true, ["video"]);
+        this.videoContainer.replaceChildren(video);
         setTimeout(() => {
             this.enableAllMenuButtons();
             this.flipMainContainerView();
-        }, 3000); // 10000
+        }, 10000);
     }
 
     runVideo(src) {
@@ -97,19 +95,22 @@ class FeedCesar {
         this.flipMainContainerView();
         if (isLastSelection === true) {
             if (this.unhealthy > this.healthy) {
-                // TODO: play unhealthy ending video
-                console.log("unhealthy");
+                const video = Util.createVideo(this.assets["endunhealthy"].objectURL, "videoIntro", false, false, true, ["video"]);
+                this.videoContainer.replaceChildren(video);
             } else {
-                // TODO: play healthy ending video
-                console.log("healthy");
+                const video = Util.createVideo(this.assets["endhealthy"].objectURL, "videoIntro", false, false, true, ["video"]);
+                this.videoContainer.replaceChildren(video);
             }
+            setTimeout(() => {
+                window.location.reload();
+            }, 11111);
         } else {
-            // TODO: play src video
-
+            const video = Util.createVideo(src, "videoIntro", false, false, true, ["video"]);
+            this.videoContainer.replaceChildren(video);
             setTimeout(() => {
                 this.enableNonSelectedMenuButtons();
                 this.flipMainContainerView();
-            }, 1000);
+            }, 10000);
         }
     }
 
@@ -184,7 +185,7 @@ class FeedCesar {
             default:
                 console.log("Button id not found");
         }
-        app.runVideo(app.assets[id]);
+        app.runVideo(app.assets[id].objectURL);
     }
 
     destroy() {
